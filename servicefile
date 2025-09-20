@@ -1,0 +1,25 @@
+sudo vim /etc/systemd/system/aws-node.service
+
+[Unit]
+Description=LOTR Node.js Application
+After=network.target mysql.service
+
+[Service]
+ExecStart=/usr/bin/node /home/ubuntu/sinzn/aws-node/server.js
+WorkingDirectory=/home/ubuntu/sinzn/aws-node
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=aws-node
+User=ubuntu
+EnvironmentFile=/home/ubuntu/sinzn/aws-node/.env
+
+# Ensure correct PATH for Node.js + npm
+Environment=PATH=/usr/bin:/usr/local/bin
+
+# Ensure it runs inside project folder
+ExecStartPre=/usr/bin/npm install --prefix /home/ubuntu/sinzn/aws-node
+
+[Install]
+WantedBy=multi-user.target
