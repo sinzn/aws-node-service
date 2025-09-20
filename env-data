@@ -1,0 +1,29 @@
+MYSQL_HOST=127.0.0.1
+MYSQL_USER=*******
+MYSQL_PASSWORD=*******
+MYSQL_DATABASE=*******
+PORT=8080
+
+CREATE DATABASE lotr;
+CREATE USER 'lotruser'@'localhost' IDENTIFIED BY '********';
+GRANT ALL PRIVILEGES ON lotr.* TO 'lotruser'@'localhost';
+FLUSH PRIVILEGES;
+
+use lotr;
+
+CREATE TABLE characters (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  race VARCHAR(50),
+  realm VARCHAR(100),
+  weapon VARCHAR(100)
+);
+
+INSERT INTO characters (name, race, realm, weapon) VALUES
+('Aragorn', 'Human', 'Gondor', 'Sword'),
+('Legolas', 'Elf', 'Mirkwood', 'Bow'),
+('Gimli', 'Dwarf', 'Lonely Mountain', 'Axe'),
+('Frodo Baggins', 'Hobbit', 'Shire', 'Sting'),
+('Gandalf', 'Maia', 'Valinor', 'Staff');
+
+SELECT * FROM characters;
